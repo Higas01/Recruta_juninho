@@ -1,0 +1,152 @@
+import {
+	Button,
+	Flex,
+	Heading,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
+	useMediaQuery,
+	Box,
+	Link,
+} from "@chakra-ui/react";
+import { BiSolidUser, BiAward } from "react-icons/bi";
+import { HiMenu } from "react-icons/hi";
+import { MdVerified } from "react-icons/md";
+import { RiLogoutBoxRFill } from "react-icons/ri";
+import { AiFillExperiment } from "react-icons/ai";
+
+const UserAuthenticatedNavBar = () => {
+	const [isLargerThan768px] = useMediaQuery("(min-width: 768px)");
+
+	return (
+		<nav>
+			<Flex
+				alignItems="center"
+				padding={isLargerThan768px ? "1rem" : "2rem"}
+				justifyContent="space-between"
+				borderBottom="1px solid #cccc"
+				width="100vw"
+				position="fixed"
+				background="#fff"
+				zIndex="2"
+			>
+				<Heading
+					as="h2"
+					textTransform="uppercase"
+					fontSize={isLargerThan768px ? "2rem" : "1.5rem"}
+				>
+					<Link
+						href="/"
+						_hover={{
+							textDecoration: "none",
+						}}
+					>
+						Recruta Juninho
+					</Link>
+				</Heading>
+
+				{isLargerThan768px && (
+					<Flex textAlign="center" alignItems="center">
+						<Link
+							fontSize="1.5rem"
+							fontWeight="bold"
+							marginRight="2rem"
+							href="/jobs"
+						>
+							VER VAGAS
+						</Link>
+						<Menu>
+							<MenuButton
+								as={Button}
+								fontSize="1.5rem"
+								padding="2rem"
+								margin="1rem"
+								border="1px solid #cccc"
+								background="none"
+							>
+								Menu
+							</MenuButton>
+							<MenuList fontSize="1.5rem">
+								<Link
+									href="/users/update"
+									_hover={{
+										textDecoration: "none",
+									}}
+								>
+									<MenuItem
+										padding="1rem"
+										icon={<BiSolidUser fontSize="2rem" />}
+									>
+										Atualizar Perfil
+									</MenuItem>
+								</Link>
+								<Link
+									href="/users/experience"
+									_hover={{
+										textDecoration: "none",
+									}}
+								>
+									<MenuItem
+										padding="1rem"
+										icon={<AiFillExperiment fontSize="2rem" />}
+									>
+										Atualizar Experiência
+									</MenuItem>
+								</Link>
+								<MenuItem
+									padding="1rem"
+									icon={<RiLogoutBoxRFill fontSize="2rem" />}
+								>
+									Sair
+								</MenuItem>
+							</MenuList>
+						</Menu>
+					</Flex>
+				)}
+				{!isLargerThan768px && (
+					<>
+						<Menu>
+							<MenuButton
+								as={Button}
+								aria-label="Options"
+								variant="outline"
+								fontSize="2rem"
+								padding="1rem"
+								border="none"
+							>
+								<HiMenu />
+							</MenuButton>
+							<MenuList fontSize="1.5rem" position="static">
+								<Link href="/jobs">
+									<MenuItem icon={<BiAward fontSize="2rem" />}>
+										Ver Vagas
+									</MenuItem>
+								</Link>
+								<Box borderTop="0.1rem solid #cccc">
+									<Link href="/users/update">
+										<MenuItem icon={<BiSolidUser fontSize="2rem" />}>
+											Atualizar Perfil
+										</MenuItem>
+									</Link>
+									<Link href="/users/experience">
+										<MenuItem icon={<MdVerified fontSize="2rem" />}>
+											Atualizar Experiência
+										</MenuItem>
+									</Link>
+								</Box>
+								<Box borderTop="0.1rem solid #cccc">
+									<MenuItem icon={<RiLogoutBoxRFill fontSize="2rem" />}>
+										Sair
+									</MenuItem>
+								</Box>
+							</MenuList>
+						</Menu>
+					</>
+				)}
+			</Flex>
+		</nav>
+	);
+};
+
+export default UserAuthenticatedNavBar;
