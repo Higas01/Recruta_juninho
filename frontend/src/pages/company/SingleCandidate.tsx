@@ -12,6 +12,7 @@ const SingleCandidate = () => {
 		"Ruby on Rails",
 	];
 	const [isLargerThan1000px] = useMediaQuery("(min-width: 1000px)");
+
 	return (
 		<section>
 			<Flex

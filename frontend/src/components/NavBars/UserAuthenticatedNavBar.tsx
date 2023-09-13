@@ -10,14 +10,33 @@ import {
 	Box,
 	Link,
 } from "@chakra-ui/react";
-import { BiSolidUser, BiAward } from "react-icons/bi";
+import { BiAward } from "react-icons/bi";
 import { HiMenu } from "react-icons/hi";
-import { MdVerified } from "react-icons/md";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 import { AiFillExperiment } from "react-icons/ai";
+import { useContext } from "react";
+import { ApiContext } from "../../context/api";
+import { useNavigate } from "react-router-dom";
+import { UserAuthContext } from "../../context/UserAuth";
 
 const UserAuthenticatedNavBar = () => {
 	const [isLargerThan768px] = useMediaQuery("(min-width: 768px)");
+
+	const { URL } = useContext(ApiContext);
+	const { setUserAuthenticated } = useContext(UserAuthContext);
+
+	const navigate = useNavigate();
+
+	const handleUserLogout = async () => {
+		try {
+			await fetch(`${URL}/user/logout`, {
+				method: "POST",
+				credentials: "include",
+			});
+			setUserAuthenticated(false);
+			navigate("/");
+		} catch {}
+	};
 
 	return (
 		<nav>
@@ -69,19 +88,6 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
 								<Link
-									href="/users/update"
-									_hover={{
-										textDecoration: "none",
-									}}
-								>
-									<MenuItem
-										padding="1rem"
-										icon={<BiSolidUser fontSize="2rem" />}
-									>
-										Atualizar Perfil
-									</MenuItem>
-								</Link>
-								<Link
 									href="/users/experience"
 									_hover={{
 										textDecoration: "none",
@@ -97,6 +103,7 @@ const UserAuthenticatedNavBar = () => {
 								<MenuItem
 									padding="1rem"
 									icon={<RiLogoutBoxRFill fontSize="2rem" />}
+									onClick={handleUserLogout}
 								>
 									Sair
 								</MenuItem>
@@ -124,19 +131,17 @@ const UserAuthenticatedNavBar = () => {
 									</MenuItem>
 								</Link>
 								<Box borderTop="0.1rem solid #cccc">
-									<Link href="/users/update">
-										<MenuItem icon={<BiSolidUser fontSize="2rem" />}>
-											Atualizar Perfil
-										</MenuItem>
-									</Link>
 									<Link href="/users/experience">
-										<MenuItem icon={<MdVerified fontSize="2rem" />}>
+										<MenuItem icon={<AiFillExperiment fontSize="2rem" />}>
 											Atualizar Experiência
 										</MenuItem>
 									</Link>
 								</Box>
 								<Box borderTop="0.1rem solid #cccc">
-									<MenuItem icon={<RiLogoutBoxRFill fontSize="2rem" />}>
+									<MenuItem
+										icon={<RiLogoutBoxRFill fontSize="2rem" />}
+										onClick={handleUserLogout}
+									>
 										Sair
 									</MenuItem>
 								</Box>

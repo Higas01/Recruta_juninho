@@ -29,6 +29,7 @@ import { State } from "../../interface/IState";
 import * as EmailValidator from "email-validator";
 import { ApiContext } from "../../context/api";
 import { IResponse } from "../../interface/IResponse";
+import { useNavigate } from "react-router-dom";
 
 const RegisterUser = () => {
 	// Inputs
@@ -82,6 +83,8 @@ const RegisterUser = () => {
 	const [showSpinner, setShowSpinner] = useState<boolean>(false);
 
 	const { URL } = useContext(ApiContext);
+
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (arrayStates.length === 0) {
@@ -237,6 +240,9 @@ const RegisterUser = () => {
 			if (data.message === "Usuário criado com sucesso") {
 				setShowSpinner(false);
 				setSuccess(true);
+				setTimeout(() => {
+					navigate("/user/login");
+				}, 2000);
 			}
 
 			if (data.message === "Usuário já existente") {

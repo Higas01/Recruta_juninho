@@ -1,4 +1,3 @@
-import React from "react";
 import { FaLocationDot, FaFileContract } from "react-icons/fa6";
 import { BsCash } from "react-icons/bs";
 import { SiLevelsdotfyi } from "react-icons/si";
@@ -7,15 +6,17 @@ import { FaLocationArrow } from "react-icons/fa";
 import { Flex, Text } from "@chakra-ui/react";
 
 interface Props {
-	remote: boolean;
-	sallary: number;
-	type_of_contract: string;
-	level: string;
+	remote: boolean[];
+	sallary: string[];
+	type_of_contract: string[];
+	level: string[];
+	state: string[];
+	city: string[];
 }
 
 const Details = (Props: Props) => {
 	return (
-		<Flex direction="column">
+		<Flex direction="column" wrap="wrap">
 			<Flex wrap="wrap">
 				<Flex alignItems="center" margin="1rem">
 					<SiLevelsdotfyi fontSize="1.5rem" />
@@ -46,7 +47,7 @@ const Details = (Props: Props) => {
 				<Flex alignItems="center" margin="1rem">
 					<FaLocationArrow fontSize="1.5rem" />
 					<Text fontSize="1.5rem" margin="1rem">
-						Maceió, Alagoas
+						{Props.state}, {Props.city}
 					</Text>
 				</Flex>
 			</Flex>

@@ -1,8 +1,6 @@
 export class UpdateJobDTO {
   name?: string;
 
-  description?: string;
-
   level?: string;
 
   type_of_contract?: string;

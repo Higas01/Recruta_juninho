@@ -5,6 +5,15 @@ import {
 	FormControl,
 	useMediaQuery,
 	Box,
+	Modal,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalFooter,
+	ModalBody,
+	Button,
+	ModalCloseButton,
+	useDisclosure,
 } from "@chakra-ui/react";
 import JobComponent from "../components/Job/JobComponent";
 import Inputs from "../components/Inputs/Inputs";
@@ -17,6 +26,8 @@ import getStates from "../hooks/GetStates";
 import getCitys from "../hooks/GetCitys";
 import InputSelect from "../components/Inputs/InputSelect";
 import { ApiContext } from "../context/api";
+import { useNavigate } from "react-router-dom";
+import { UserAuthContext } from "../context/UserAuth";
 
 const Job = () => {
 	const [habilitysSearch, setHabilitysSearch] = useState<string>("");
@@ -30,6 +41,11 @@ const Job = () => {
 	const [filter, setFilter] = useState(false);
 	const { URL } = useContext(ApiContext);
 	const [data, setData] = useState<IJobs[]>([]);
+
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
+	const navigate = useNavigate();
+	const { userAuthenticated } = useContext(UserAuthContext);
 
 	useEffect(() => {
 		if (arrayStates.length === 0) {
@@ -45,6 +61,7 @@ const Job = () => {
 		const getJobs = async () => {
 			const response = await fetch(`${URL}/job`);
 			const result = await response.json();
+			console.log(result);
 			setData(result);
 		};
 
@@ -102,8 +119,27 @@ const Job = () => {
 		}
 	};
 
+	const showUniqueJob = (id: number) => {
+		if (!userAuthenticated) {
+			onOpen();
+			return;
+		}
+		navigate(`/jobs/${id}`);
+	};
+
 	return (
 		<section>
+			<Modal isOpen={isOpen} onClose={onClose} size="6xl">
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader fontSize="3rem">cadastre-se</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody fontSize="2rem">
+						Você precisa se autenticar para verificar a vaga!
+					</ModalBody>
+					<ModalFooter></ModalFooter>
+				</ModalContent>
+			</Modal>
 			<Flex minHeight="100vh" backgroundColor="#f4f4f4" direction="column">
 				<Flex
 					marginTop="2rem"
@@ -186,18 +222,20 @@ const Job = () => {
 								)}
 							</Box>
 						)}
-						{data.length > 0 &&
+						{data &&
+							data.length > 0 &&
 							data.map((value) => (
 								<JobComponent
 									key={value.id}
 									name={value.name}
 									habilitys={value.habilitys}
-									description={value.description}
 									remote={value.remote}
 									sallary={value.sallary}
+									responsibilities={value.responsibilities}
 									type_of_contract={value.type_of_contract}
 									level={value.level}
 									btnText="Ver Vaga"
+									funcBtn={() => showUniqueJob(value.id)}
 								/>
 							))}
 					</Flex>
@@ -207,9 +245,9 @@ const Job = () => {
 							backgroundColor="#fff"
 							direction="column"
 							height="20%"
-							marginTop="3rem"
 							padding="3rem"
 							boxShadow="lg"
+							margin="3rem"
 						>
 							<Heading as="h2" fontSize="2.5rem">
 								Filtro de Busca

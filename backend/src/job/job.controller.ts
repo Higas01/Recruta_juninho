@@ -55,6 +55,17 @@ export class JobController {
     return this.jobService.getByFK(request);
   }
 
+  @Get(':id')
+  getById(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return this.jobService.getByID(id);
+  }
+
   @HttpCode(200)
   @Put(':id')
   updateJob(

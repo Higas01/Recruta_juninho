@@ -1,8 +1,8 @@
 import {
   BadRequestException,
-  ConsoleLogger,
   Inject,
   Injectable,
+  NotFoundException,
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -54,7 +54,6 @@ export class JobService {
       const createForJob = {
         name: value.name,
         level: value.level,
-        description: value.description,
         habilitys: habilitysLowerCase,
         type_of_contract: value.type_of_contract,
         sallary: value.sallary,
@@ -120,11 +119,6 @@ export class JobService {
         const searchToLowerCase = search.map((term) => term.toLowerCase());
         searchConditions = searchToLowerCase.map((term) => ({
           [Op.or]: [
-            {
-              description: {
-                [Op.iLike]: `%${term}%`,
-              },
-            },
             {
               name: {
                 [Op.iLike]: `%${term}%`,
@@ -302,7 +296,6 @@ export class JobService {
 
       const jobForUpdate = {
         name: value.name,
-        description: value.description,
         level: value.level,
         habilitys: value.habilitys,
         sallary: value.sallary,
@@ -320,6 +313,27 @@ export class JobService {
       return {
         message: 'Vaga atualizado com sucesso',
       };
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async getByID(id: number) {
+    try {
+      const job = await this.jobService.findOne({
+        where: { id },
+        include: [
+          {
+            model: Company,
+            attributes: ['name', 'city', 'state', 'photo', 'description'],
+          },
+        ],
+      });
+      if (!job) {
+        throw new NotFoundException('Vaga não existe');
+      }
+
+      return [job];
     } catch (e) {
       throw e;
     }

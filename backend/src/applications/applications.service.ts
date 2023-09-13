@@ -58,6 +58,7 @@ export class ApplicationsService {
         message: 'Candidatura efetuada com sucesso',
       };
     } catch (e) {
+      console.log(e);
       throw e;
     }
   }

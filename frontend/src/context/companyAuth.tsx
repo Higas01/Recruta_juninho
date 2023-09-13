@@ -41,7 +41,6 @@ const CompanyAuthProvider = ({ children }: { children: ReactNode }) => {
 			setCompanyAuthenticated(false);
 		}
 	};
-	console.log(companyAuthenticated);
 
 	return (
 		<CompanyAuthContext.Provider

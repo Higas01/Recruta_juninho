@@ -1,8 +1,29 @@
 import { Flex, Heading, useMediaQuery } from "@chakra-ui/react";
 import CandidatesCard from "../../components/CandidatesCard";
+import { useParams } from "react-router-dom";
+import { useContext, useState, useEffect } from "react";
+import { IUsers } from "../../interface/IUsers";
+import { ApiContext } from "../../context/api";
 
 const ShowCandidates = () => {
 	const [isLargerThan950px] = useMediaQuery("(min-width: 950px)");
+
+	const { id } = useParams();
+
+	const { URL } = useContext(ApiContext);
+
+	const [data, setData] = useState<IUsers[]>([]);
+
+	useEffect(() => {
+		const getCandidates = async () => {
+			const response = await fetch(`${URL}/application?jobId=${id}`);
+			const result = await response.json();
+			console.log(result);
+			setData(result);
+		};
+
+		getCandidates();
+	}, []);
 
 	return (
 		<section>
@@ -22,27 +43,19 @@ const ShowCandidates = () => {
 					<Heading as="h1" fontSize={isLargerThan950px ? "3rem" : "2rem"}>
 						Todos os candidatos da vaga estão listados abaixo
 					</Heading>
-					<CandidatesCard
-						name="Higor Matheus"
-						level="Júnior"
-						tel="(82) 99366-9931"
-						age={19}
-						habilitys="JavaScript, React, NodeJS, SQL, MongoDB, TypeScript, Git"
-					/>
-					<CandidatesCard
-						name="Higor Matheus"
-						level="Júnior"
-						tel="(82) 99366-9931"
-						age={19}
-						habilitys="JavaScript, React, NodeJS, SQL, MongoDB, TypeScript, Git"
-					/>
-					<CandidatesCard
-						name="Higor Matheus"
-						level="Júnior"
-						tel="(82) 99366-9931"
-						age={19}
-						habilitys="JavaScript, React, NodeJS, SQL, MongoDB, TypeScript, Git"
-					/>
+					{data.length > 0 &&
+						data.map((value) => (
+							<CandidatesCard
+								key={value.id}
+								name={value.user.name}
+								level={value.user.level}
+								age={value.user.age}
+								habilitys={value.user.habilitys}
+								tel={value.user.tel}
+								description={value.user.description}
+								email={value.user.email}
+							/>
+						))}
 				</Flex>
 			</Flex>
 		</section>
