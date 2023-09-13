@@ -29,7 +29,6 @@ const CreateJob = () => {
 	const [remote, setRemote] = useState<string>("");
 	const [habilitys, setHabilitys] = useState<string>("");
 	const [arrayHabilitys, setArrayHabilitys] = useState<string[]>([]);
-	const [description, setDescription] = useState<string>("");
 	const [responsibilities, setResponsibilities] = useState<string>("");
 	const [requirements, setRequirements] = useState<string>("");
 
@@ -42,8 +41,6 @@ const CreateJob = () => {
 	const [remoteError, setRemoteError] = useState<boolean>(false);
 	const [habilitysError, setHabilitysError] = useState<boolean>(false);
 	const [msgHabilitysError, setMsgHabilitysError] = useState<string>("");
-	const [descriptionError, setDescriptionError] = useState<boolean>(false);
-	const [msgDescriptionError, setMsgDescriptionError] = useState<string>("");
 	const [typeOfContract, setTypeOfContract] = useState("");
 	const [responsibilitiesError, setResponsibilitiesError] =
 		useState<boolean>(false);
@@ -86,7 +83,6 @@ const CreateJob = () => {
 			setLevelError(false);
 			setRemoteError(false);
 			setHabilitysError(false);
-			setDescriptionError(false);
 			setTypeOfContractError(false);
 			setSuccess(false);
 
@@ -120,12 +116,6 @@ const CreateJob = () => {
 				return;
 			}
 
-			if (!description) {
-				setDescriptionError(true);
-				setMsgDescriptionError("Campo Descrição precisa ser preenchido");
-				return;
-			}
-
 			if (!responsibilities) {
 				setResponsibilitiesError(true);
 				setMsgResponsibilitiesError(
@@ -153,7 +143,6 @@ const CreateJob = () => {
 				level,
 				remote: remoteBool,
 				habilitys: arrayHabilitys,
-				description,
 				type_of_contract: typeOfContract,
 				responsibilities,
 				requirements,
@@ -325,17 +314,6 @@ const CreateJob = () => {
 							>
 								Salvar Habilidade
 							</Btn>
-							<TextArea
-								label="Qual a descrição da vaga?"
-								description={description}
-								setDescription={setDescription}
-								placeholder={
-									descriptionError
-										? msgDescriptionError
-										: "Exemplo: Essa vaga representa o coração da empresa, você ira nos auxiliar como Desenvolvedor Android..."
-								}
-								error={descriptionError && true}
-							/>
 							<TextArea
 								label="Quais as responsabilidades da função?"
 								description={responsibilities}

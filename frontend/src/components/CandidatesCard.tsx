@@ -14,13 +14,14 @@ interface Props {
 	name: string;
 	level: string;
 	tel: string;
-	habilitys: string;
+	habilitys: string[];
 	age: number;
+	description: string;
+	email: string;
 }
 
 const CandidatesCard = (Props: Props) => {
 	const [isDescriptionVisible, setIsDescriptionVisible] = useState(false);
-	const [isLargerThan800px] = useMediaQuery("(min-width: 800px)");
 	const [isLargerThan900px] = useMediaQuery("(min-width: 900px)");
 
 	const handleShowDescription = () => {
@@ -53,6 +54,12 @@ const CandidatesCard = (Props: Props) => {
 					</Box>
 					<Box margin="1rem">
 						<Heading as="h2" fontSize="1.5rem">
+							Email do candidato
+						</Heading>
+						<Text fontSize="1.3rem">{Props.email}</Text>
+					</Box>
+					<Box margin="1rem">
+						<Heading as="h2" fontSize="1.5rem">
 							Level do candidato
 						</Heading>
 						<Text fontSize="1.5rem">{Props.level}</Text>
@@ -67,7 +74,15 @@ const CandidatesCard = (Props: Props) => {
 						<Heading as="h2" fontSize="1.5rem">
 							Habilidades do candidato
 						</Heading>
-						<Text fontSize="1.3rem">{Props.habilitys}</Text>
+						<Flex gap="0.5rem">
+							{Props.habilitys &&
+								Props.habilitys.length > 0 &&
+								Props.habilitys.map((hability, index) => (
+									<Text fontSize="1.3rem" key={index}>
+										{hability}
+									</Text>
+								))}	
+						</Flex>
 					</Flex>
 					<Box margin="1rem">
 						<Heading as="h2" fontSize="1.5rem">
@@ -108,19 +123,7 @@ const CandidatesCard = (Props: Props) => {
 					<Heading as="h2" margin="1rem">
 						Um pouco mais sobre o candidato
 					</Heading>
-					<Text fontSize="1.3rem">
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Voluptatibus explicabo facilis excepturi neque quos. Dolores
-						eligendi amet aliquid, aliquam earum illum nostrum assumenda sit eos
-						iusto accusamus cumque ipsum necessitatibus. Lorem ipsum dolor sit
-						amet consectetur adipisicing elit. Voluptatibus explicabo facilis
-						excepturi neque quos. Dolores eligendi amet aliquid, aliquam earum
-						illum nostrum assumenda sit eos iusto accusamus cumque ipsum
-						necessitatibus. Lorem ipsum dolor sit amet consectetur adipisicing
-						elit. Voluptatibus explicabo facilis excepturi neque quos. Dolores
-						eligendi amet aliquid, aliquam earum illum nostrum assumenda sit eos
-						iusto accusamus cumque ipsum necessitatibus.
-					</Text>
+					<Text fontSize="1.3rem">{Props.description}</Text>
 				</Box>
 			)}
 		</Box>

@@ -9,14 +9,15 @@ import Btn from "../Btn";
 interface Props {
 	name: string;
 	habilitys: string[];
-	description: string;
 	remote: boolean;
 	sallary: string;
 	type_of_contract: string;
 	level: string;
 	btnText: string;
 	deleteBtn?: boolean;
+	responsibilities: string;
 	funcDeleteBtn?: Function;
+	funcBtn?: Function;
 }
 
 const JobComponent = (Props: Props) => {
@@ -96,9 +97,9 @@ const JobComponent = (Props: Props) => {
 				</Flex>
 				<Flex margin="1rem">
 					<Text fontSize="1.5rem">
-						{Props.description.length > 600
-							? `${Props.description.slice(0, 600)}...`
-							: Props.description}
+						{Props.responsibilities.length > 600
+							? `${Props.responsibilities.slice(0, 600)}...`
+							: Props.responsibilities}
 					</Text>
 				</Flex>
 
@@ -121,6 +122,7 @@ const JobComponent = (Props: Props) => {
 								border={true}
 								alingItems="end"
 								justifyContent="end"
+								setOnClick={Props.funcBtn}
 							>
 								{Props.btnText}
 							</Btn>
@@ -133,6 +135,7 @@ const JobComponent = (Props: Props) => {
 							border={true}
 							alingItems="end"
 							justifyContent="end"
+							setOnClick={Props.funcBtn}
 						>
 							{Props.btnText}
 						</Btn>

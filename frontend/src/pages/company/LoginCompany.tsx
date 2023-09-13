@@ -113,7 +113,7 @@ const LoginCompany = () => {
 				)}
 				<FormModel>
 					<Heading as="h2" fontSize={isLargerThan1100px ? "3rem" : "2rem"}>
-						Login
+						Login como Empresa
 					</Heading>
 					<FormControl>
 						<form onSubmit={handleSubmit}>

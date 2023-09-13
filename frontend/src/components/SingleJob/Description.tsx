@@ -3,7 +3,7 @@ import { Heading, Box, Text } from "@chakra-ui/react";
 
 interface Props {
 	title: string;
-	description: string;
+	description: string[];
 }
 
 const Description = (Props: Props) => {

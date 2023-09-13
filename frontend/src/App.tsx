@@ -13,7 +13,6 @@ import { UserAuthContext } from "./context/UserAuth";
 import { useContext, useEffect } from "react";
 import UserAuthenticatedNavBar from "./components/NavBars/UserAuthenticatedNavBar";
 import HomeUser from "./pages/users/HomeUser";
-import UpdateUser from "./pages/users/UpdateUser";
 import Experience from "./pages/users/Experience";
 import { CompanyAuthContext } from "./context/companyAuth";
 import CompanyAuthenticatedNavBar from "./components/NavBars/CompanyAuthenticatedNavBar";
@@ -25,14 +24,21 @@ import { Flex } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
 
 function App() {
-	const { userAuthenticated } = useContext(UserAuthContext);
+	const { userAuthenticated, verifyUserToken, userIsLoading } =
+		useContext(UserAuthContext);
 
 	const { companyAuthenticated, verifyCompanyToken, companyIsLoading } =
 		useContext(CompanyAuthContext);
 
 	useEffect(() => {
+		verifyUserToken();
 		verifyCompanyToken();
-	}, [companyAuthenticated, companyIsLoading]);
+	}, [
+		companyAuthenticated,
+		companyIsLoading,
+		userAuthenticated,
+		userIsLoading,
+	]);
 
 	return (
 		<>
@@ -42,7 +48,6 @@ function App() {
 				</Flex>
 			) : (
 				<>
-					{" "}
 					{userAuthenticated ? (
 						<UserAuthenticatedNavBar />
 					) : companyAuthenticated ? (
@@ -79,10 +84,6 @@ function App() {
 							element={
 								userAuthenticated ? <Navigate to="/jobs" /> : <LoginUser />
 							}
-						/>
-						<Route
-							path="/users/update"
-							element={userAuthenticated ? <UpdateUser /> : <Navigate to="/" />}
 						/>
 						<Route
 							path="/users/experience"
@@ -145,8 +146,22 @@ function App() {
 						/>
 						{/*Job Routes */}
 
-						<Route path="/jobs?" element={<Job />} />
-						<Route path="/jobs/:id" element={<SingleJob />} />
+						<Route
+							path="/jobs?"
+							element={
+								companyAuthenticated ? <Navigate to="company/jobs" /> : <Job />
+							}
+						/>
+						<Route
+							path="/jobs/:id"
+							element={
+								companyAuthenticated ? (
+									<Navigate to="company/jobs" />
+								) : (
+									<SingleJob />
+								)
+							}
+						/>
 						<Route path="*" element={<Navigate to="/" />} />
 					</Routes>
 				</>

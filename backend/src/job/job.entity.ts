@@ -36,12 +36,6 @@ export class Job extends Model {
 
   @Column({
     allowNull: false,
-    type: DataTypes.TEXT,
-  })
-  description: string;
-
-  @Column({
-    allowNull: false,
   })
   level: string;
 

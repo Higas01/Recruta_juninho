@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { Flex, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 import JobComponent from "../../components/Job/JobComponent";
 import { ApiContext } from "../../context/api";
+import { useNavigate } from "react-router-dom";
 
 const ShowJobs = () => {
 	const { URL } = useContext(ApiContext);
 	const [callApi, setCallApi] = useState(false);
 	const [isLargerThan900px] = useMediaQuery("(min-width: 900px)");
+	const navigate = useNavigate();
 
 	const [data, setData] = useState<IJobs[]>([]);
 
@@ -22,11 +24,14 @@ const ShowJobs = () => {
 			});
 			const result = await response.json();
 			setData(result);
-			console.log("hello word");
 		};
 
 		showJobs();
 	}, [callApi]);
+
+	const handleShowCandidates = async (id: number) => {
+		navigate(`/company/jobs/${id}/candidates`);
+	};
 
 	return (
 		<section
@@ -71,7 +76,7 @@ const ShowJobs = () => {
 							key={value.id}
 							name={value.name}
 							habilitys={value.habilitys}
-							description={value.description}
+							responsibilities={value.responsibilities}
 							remote={value.remote}
 							sallary={value.sallary}
 							type_of_contract={value.type_of_contract}
@@ -79,6 +84,7 @@ const ShowJobs = () => {
 							deleteBtn={true}
 							btnText="Ver Candidatos"
 							funcDeleteBtn={() => handleDeleteJob(value.id)}
+							funcBtn={() => handleShowCandidates(value.id)}
 						/>
 					))
 				) : (
