@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDTO } from 'src/dto/create.user.dto';
-import { UpdateUserDTO } from 'src/dto/update.user.dto';
 import { LoginUserDTO } from 'src/dto/login.user.dto';
 import { Request, Response } from 'express';
 
