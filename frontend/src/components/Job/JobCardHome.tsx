@@ -3,14 +3,16 @@ import { FaLocationDot, FaFileContract } from "react-icons/fa6";
 import { BsCash } from "react-icons/bs";
 import { SiLevelsdotfyi } from "react-icons/si";
 import {} from "@chakra-ui/react";
+import Btn from "../Btn";
 
 interface Props {
 	name: string;
 	type_of_contract: string;
 	habilitys: string[];
 	level: string;
-	sallary: number;
+	sallary: string;
 	remote: boolean;
+	handleJob: Function;
 }
 
 const JobCardHome = (Props: Props) => {
@@ -78,14 +80,21 @@ const JobCardHome = (Props: Props) => {
 										transition: "1s",
 									}}
 								>
-									{hability}
+									{hability.toUpperCase()}
 								</Text>
 							);
 						})}
 					</Flex>
 				</Flex>
-				<Link fontSize="2rem" margin="1rem" color="#000">
-					Ver Vaga
+				<Link
+					fontSize="2rem"
+					margin="1rem"
+					color="#000"
+					_hover={{ textDecoration: "none" }}
+				>
+					<Btn border={false} type="submit" setOnClick={Props.handleJob}>
+						Ver Vaga
+					</Btn>
 				</Link>
 			</Flex>
 		</Flex>

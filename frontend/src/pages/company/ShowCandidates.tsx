@@ -1,4 +1,4 @@
-import { Flex, Heading, useMediaQuery, Text } from "@chakra-ui/react";
+import { Flex, Heading, useMediaQuery } from "@chakra-ui/react";
 import CandidatesCard from "../../components/CandidatesCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";

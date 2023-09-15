@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 
 interface Props {
-	onFileSelect: (file: File | null) => void; // Função de retorno de chamada que leva um arquivo como argumento
+	onFileSelect: (file: File | null) => void;
 }
 
 const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
@@ -29,11 +29,10 @@ const FileUpload: React.FC<Props> = ({ onFileSelect }) => {
 
 		if (isValidFileType) {
 			setInvalidFile(false);
-			// Chame a função de retorno de chamada com o arquivo selecionado
+
 			onFileSelect(selectedFiles[0]);
 		} else {
 			event.target.value = "";
-			// Chame a função de retorno de chamada com null para indicar que nenhum arquivo foi selecionado
 			onFileSelect(null);
 		}
 	};
