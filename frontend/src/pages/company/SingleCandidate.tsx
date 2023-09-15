@@ -19,7 +19,6 @@ const SingleCandidate = () => {
 			const response = await fetch(`${URL}/experience/${userId}`);
 			const result = await response.json();
 			setData(result);
-			console.log(result);
 		};
 
 		getExperience();
