@@ -114,6 +114,7 @@ export class UserService {
       response.cookie('token', token, {
         expires: expires,
         httpOnly: true,
+        sameSite: 'none',
       });
 
       response.status(200).json({
