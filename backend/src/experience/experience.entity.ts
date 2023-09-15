@@ -47,4 +47,6 @@ export class Experience extends Model {
 
   @Column
   function: string;
+  @Column
+  experience_profile: string;
 }

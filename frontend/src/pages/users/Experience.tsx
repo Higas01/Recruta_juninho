@@ -1,26 +1,89 @@
 import { Flex, Box, useMediaQuery } from "@chakra-ui/react";
 import Btn from "../../components/Btn";
-import { Dispatch, SetStateAction, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import FormExperience from "../../components/FormExperience";
-import { BsTrashFill } from "react-icons/bs";
+import { ApiContext } from "../../context/api";
 
 const Experience = () => {
-	const [value, setValue] = useState("");
-	const [habilitys, setHabilitys] = useState("");
+	// Inputs
+	const [company, setCompany] = useState<string>("");
+	const [habilitys, setHabilitys] = useState<string>("");
 	const [arrayHabilitys, setArrayHabilitys] = useState<string[]>([]);
-	const [secondExperience, setSecondExperience] = useState(false);
-	const [thirdExperience, setThirdExperience] = useState(false);
+	const [description, setDescription] = useState<string>("");
+	const [select, setSelect] = useState<string>("");
+	const [occupation, setOccupation] = useState<string>("");
 	const [isLargerThan1000px] = useMediaQuery("(min-width: 1000px)");
-	const [isLargerThan800px] = useMediaQuery("(min-width: 800px)");
 
-	const handleAddForm = (setExperience: Dispatch<SetStateAction<boolean>>) => {
-		setExperience(true);
+	const { URL } = useContext(ApiContext);
+
+	const [error, setError] = useState<boolean>(false);
+	const [success, setSuccess] = useState<boolean>(false);
+
+	const handleValidationFirstForm = (): boolean => {
+		setError(false);
+		if (!company) {
+			setError(true);
+			return false;
+		}
+
+		if (!occupation) {
+			setError(true);
+			return false;
+		}
+
+		if (arrayHabilitys.length === 0) {
+			setError(true);
+			return false;
+		}
+
+		if (!description) {
+			setError(true);
+			return false;
+		}
+
+		if (!setSelect) {
+			setError(true);
+			return false;
+		}
+
+		return true;
 	};
 
-	const handleRemoveForm = (
-		setExperience: Dispatch<SetStateAction<boolean>>
-	) => {
-		setExperience(false);
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		const isValid = handleValidationFirstForm();
+
+		if (!isValid) {
+			return;
+		}
+
+		const value = {
+			project_name: company,
+			function: occupation,
+			experience_profile: select,
+			description,
+			habilitys: arrayHabilitys,
+		};
+
+		const response = await fetch(`${URL}/experience`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+			body: JSON.stringify(value),
+		});
+
+		const result = await response.json();
+
+		if (result.message === "Experiência registrada com sucesso") {
+			setSuccess(true);
+			setOccupation("");
+			setCompany("");
+			setDescription("");
+			setArrayHabilitys([]);
+		}
 	};
 
 	return (
@@ -30,108 +93,41 @@ const Experience = () => {
 				justifyContent="center"
 				alignItems="center"
 				background="#f4f4f4"
+				alignContent="center"
 				padding=" 25px 15px"
 				direction="column"
 			>
-				<Box width={isLargerThan1000px ? "50%" : "100%"}>
-					<FormExperience
-						value={value}
-						setValue={setValue}
-						habilitys={habilitys}
-						setHabilitys={setHabilitys}
-						setArrayHabilitys={setArrayHabilitys}
-						arrayHabilitys={arrayHabilitys}
-						description={value}
-						setDescription={setValue}
-						setSelect={setValue}
-					/>
-					<Btn
-						type="button"
-						justifyContent="end"
-						alingItems="end"
-						background={true}
-						border={true}
-						padding={true}
-						setOnClick={() => handleAddForm(setSecondExperience)}
-					>
-						Registrar Nova Experiência
-					</Btn>
-				</Box>
-				{secondExperience && (
-					<Box width={isLargerThan1000px ? "50%" : "100%"}>
-						<FormExperience
-							value={value}
-							setValue={setValue}
-							habilitys={habilitys}
-							setHabilitys={setHabilitys}
-							setArrayHabilitys={setArrayHabilitys}
-							arrayHabilitys={arrayHabilitys}
-							description={value}
-							setDescription={setValue}
-							setSelect={setValue}
-						/>
-						<Btn
-							type="button"
-							justifyContent="end"
-							alingItems="end"
-							background={true}
-							border={true}
-							padding={true}
-							setOnClick={() => handleAddForm(setThirdExperience)}
-						>
-							Registrar Nova Experiência
-						</Btn>
-						<Btn
-							type="button"
-							setOnClick={() => handleRemoveForm(setSecondExperience)}
-							border={false}
-							justifyContent="start"
-							alingItems="start"
-						>
-							<BsTrashFill />
-						</Btn>
-					</Box>
-				)}
-				{thirdExperience && (
-					<Box width={isLargerThan1000px ? "50%" : "100%"}>
-						<FormExperience
-							value={value}
-							setValue={setValue}
-							habilitys={habilitys}
-							setHabilitys={setHabilitys}
-							setArrayHabilitys={setArrayHabilitys}
-							arrayHabilitys={arrayHabilitys}
-							description={value}
-							setDescription={setValue}
-							setSelect={setValue}
-						/>
-						<Btn
-							type="button"
-							justifyContent="end"
-							alingItems="end"
-							background={true}
-							border={true}
-							padding={true}
-							disabled={true}
-						>
-							Registrar Nova Experiência
-						</Btn>
-						<Btn
-							type="button"
-							setOnClick={() => handleRemoveForm(setThirdExperience)}
-							border={false}
-							justifyContent="start"
-							alingItems="start"
-						>
-							<BsTrashFill />
-						</Btn>
-					</Box>
-				)}
-				<Box margin="5rem">
-					<Btn type="submit" border={true}>
-						Salvar
-					</Btn>
-				</Box>
+				<form
+					style={{
+						width: "100%",
+					}}
+					onSubmit={handleSubmit}
+				>
+					<Flex justifyContent="center" alignItems="center" direction="column">
+						<Box width={isLargerThan1000px ? "50%" : "100%"}>
+							<FormExperience
+								value={company}
+								setValue={setCompany}
+								habilitys={habilitys}
+								setHabilitys={setHabilitys}
+								setArrayHabilitys={setArrayHabilitys}
+								arrayHabilitys={arrayHabilitys}
+								description={description}
+								setDescription={setDescription}
+								setSelect={setSelect}
+								occupation={occupation}
+								setOccupation={setOccupation}
+								error={error && true}
+								success={success}
+							/>
+						</Box>
+						<Box margin="5rem">
+							<Btn type="submit" border={true}>
+								Salvar
+							</Btn>
+						</Box>
+					</Flex>
+				</form>
 			</Flex>
 		</section>
 	);

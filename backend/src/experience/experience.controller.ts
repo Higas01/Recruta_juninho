@@ -28,18 +28,22 @@ export class ExperienceController {
   ): Promise<object> {
     return this.experienceService.createExperience(value, request);
   }
+  @HttpCode(201)
+  @Get()
+  getExperience(@Req() request: Request): Promise<object> {
+    return this.experienceService.getByToken(request);
+  }
 
   @HttpCode(200)
   @Get(':id')
   getByFK(
-    @Req() request: Request,
     @Param(
       'id',
       new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
     )
     queryId: number,
   ): Promise<object> {
-    return this.experienceService.getByFK(request, queryId);
+    return this.experienceService.getByID(queryId);
   }
 
   @HttpCode(200)

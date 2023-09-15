@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import {
 	Flex,
 	FormControl,
@@ -6,6 +6,9 @@ import {
 	Heading,
 	Box,
 	useMediaQuery,
+	Alert,
+	AlertIcon,
+	AlertDescription,
 } from "@chakra-ui/react";
 import Inputs from "./Inputs/Inputs";
 import Btn from "./Btn";
@@ -15,6 +18,8 @@ import { RiCloseLine } from "react-icons/ri";
 
 interface Props {
 	value: string;
+	occupation: string;
+	setOccupation: Dispatch<SetStateAction<string>>;
 	setValue: Dispatch<SetStateAction<string>>;
 	setSelect: Dispatch<SetStateAction<string>>;
 	habilitys: string;
@@ -23,6 +28,8 @@ interface Props {
 	setArrayHabilitys: Dispatch<SetStateAction<string[]>>;
 	description: string;
 	setDescription: Dispatch<SetStateAction<string>>;
+	error: boolean;
+	success: boolean;
 }
 
 const FormExperience = (Props: Props) => {
@@ -54,7 +61,7 @@ const FormExperience = (Props: Props) => {
 				minWidth="75%"
 			>
 				<Heading fontSize={isLargerThan800px ? "3rem" : "2rem"}>
-					Adicionar Experiência <br></br> (Máximo de 3 experiências)
+					Adicionar Experiência
 				</Heading>
 				<Flex>
 					<FormControl>
@@ -68,8 +75,8 @@ const FormExperience = (Props: Props) => {
 						/>
 						<Inputs
 							type="text"
-							value={Props.value}
-							setValue={Props.setValue}
+							value={Props.occupation}
+							setValue={Props.setOccupation}
 							helperText="exemplo: Desenvolvedor Full-Stack"
 							label="Cargo de ocupação"
 							width={true}
@@ -81,8 +88,8 @@ const FormExperience = (Props: Props) => {
 							width={true}
 						/>
 						<Inputs
-							label="Escreva Suas 7 Principais Habilidades (uma de cada vez)"
-							helperText="exemplo: Java"
+							label="Escreva Suas 7 Principais Habilidades Utilizadas (uma de cada vez)"
+							helperText={"exemplo: Java"}
 							type="text"
 							value={Props.habilitys}
 							setValue={Props.setHabilitys}
@@ -92,6 +99,7 @@ const FormExperience = (Props: Props) => {
 						<Flex height="20%" flexWrap="wrap">
 							{Props.arrayHabilitys.map((hability, index) => (
 								<Flex
+									key={index}
 									margin="1rem"
 									borderRadius="6px"
 									flexDirection="column"
@@ -110,9 +118,7 @@ const FormExperience = (Props: Props) => {
 											<RiCloseLine fontSize="1.5rem" />
 										</Btn>
 									</Flex>
-									<Text fontSize="1.5rem" key={index}>
-										{hability}
-									</Text>
+									<Text fontSize="1.5rem">{hability}</Text>
 								</Flex>
 							))}
 							<Btn
@@ -135,6 +141,21 @@ const FormExperience = (Props: Props) => {
 						</Flex>
 					</FormControl>
 				</Flex>
+				{Props.success ? (
+					<Alert status="success" fontSize="1.5rem" margin="1rem">
+						<AlertIcon boxSize="2rem" />
+						Experiência cadastrada com sucesso!
+					</Alert>
+				) : Props.error ? (
+					<Alert status="error" fontSize="1.5rem" margin="1rem">
+						<AlertIcon boxSize="2rem" />
+						<AlertDescription>
+							Todos os inputs precisam ser preenchidos!
+						</AlertDescription>
+					</Alert>
+				) : (
+					<></>
+				)}
 			</Box>
 		</>
 	);

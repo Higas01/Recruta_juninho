@@ -1,17 +1,29 @@
 import { Flex, Heading, useMediaQuery, Text } from "@chakra-ui/react";
 import CandidateComponent from "../../components/CandidateComponent";
+import { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ApiContext } from "../../context/api";
+import { IExperience } from "../../interface/IExperiences";
 
 const SingleCandidate = () => {
-	const habilitys = [
-		"React",
-		"Node",
-		"Sequelize",
-		"TDD",
-		"PostgreSQL",
-		"MongoDB",
-		"Ruby on Rails",
-	];
 	const [isLargerThan1000px] = useMediaQuery("(min-width: 1000px)");
+
+	const { userId } = useParams();
+
+	const [data, setData] = useState<IExperience[]>([]);
+
+	const { URL } = useContext(ApiContext);
+
+	useEffect(() => {
+		const getExperience = async () => {
+			const response = await fetch(`${URL}/experience/${userId}`);
+			const result = await response.json();
+			setData(result);
+			console.log(result);
+		};
+
+		getExperience();
+	}, []);
 
 	return (
 		<section>
@@ -26,117 +38,24 @@ const SingleCandidate = () => {
 					Experiência do candidato:
 				</Heading>
 				<Text fontSize={isLargerThan1000px ? "2.7rem" : "1.7rem"}>
-					Higor Matheus Rocha Porangaba
+					{data.length > 0 && data.map((value) => value.user.name)}
 				</Text>
-				<Flex justifyContent="center" alignItems="center" direction="column">
-					<CandidateComponent
-						title="Desenvolvedor JavaScript Full Stack"
-						name_project="Controle de Estoque"
-						habilitys={habilitys}
-						perfil="Projeto Pessoal"
-						description="Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						
-                        "
-					/>
-					<CandidateComponent
-						title="Desenvolvedor JavaScript Full Stack"
-						name_project="Controle de Estoque"
-						habilitys={habilitys}
-						perfil="Projeto Pessoal"
-						description="Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						
-                        "
-					/>
-					<CandidateComponent
-						title="Desenvolvedor JavaScript Full Stack"
-						name_project="Controle de Estoque"
-						habilitys={habilitys}
-						perfil="Projeto Pessoal"
-						description="Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						Estamos buscando uma pessoa com deficiência para desenvolvedor em Backend e que queira fazer parte do time, que tenha paixão por tecnologia, negócio e pessoas. Seu papel será desenvolver ferramentas, extrair métricas e criar documentações. Codar com eficiência e qualidade, analisando o cenário 360 a fim de evitar impactos negativos em processos já existentes, desenvolver testes unitários, de integração e/ou regressão. Ser proativo e procurar evoluir seus conhecimentos e de seus parceiros de trabalho.
-                        Responsabilidades:
-                        Desenvolver apps que apoiam o fluxo de desenvolvimento;
-                        Se aprofundar em problemas do Labs e propor soluções de forma pragmática;              
-                        Propor e ajudar na implementação de melhorias no processo da empresa;
-                        Estar disposto a produzir documentação;
-                        Estar disposto a se aprofundar em problemas de arquitetura e design de software
-						
-                        "
-					/>
+				<Flex
+					justifyContent="center"
+					alignItems="center"
+					direction="column"
+					width="100%"
+				>
+					{data.length > 0 &&
+						data.map((value) => (
+							<CandidateComponent
+								title={value.function}
+								name_project={value.project_name}
+								habilitys={value.habilitys}
+								description={value.description}
+								perfil={value.experience_profile}
+							/>
+						))}
 				</Flex>
 			</Flex>
 		</section>

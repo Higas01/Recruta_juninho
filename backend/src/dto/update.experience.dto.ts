@@ -3,4 +3,5 @@ export class UpdateExperienceDTO {
   project_name?: string;
   description?: string;
   habilitys?: string[];
+  experience_profile?: string;
 }

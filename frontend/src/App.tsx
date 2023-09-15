@@ -22,6 +22,7 @@ import ShowCandidates from "./pages/company/ShowCandidates";
 import SingleCandidate from "./pages/company/SingleCandidate";
 import { Flex } from "@chakra-ui/react";
 import { Spinner } from "@chakra-ui/react";
+import ShowExperiences from "./pages/ShowExperience";
 
 function App() {
 	const { userAuthenticated, verifyUserToken, userIsLoading } =
@@ -86,8 +87,14 @@ function App() {
 							}
 						/>
 						<Route
-							path="/users/experience"
+							path="/users/experience/create"
 							element={userAuthenticated ? <Experience /> : <Navigate to="/" />}
+						/>
+						<Route
+							path="/users/experience"
+							element={
+								userAuthenticated ? <ShowExperiences /> : <Navigate to="/" />
+							}
 						/>
 
 						{/*Company Routes */}
@@ -135,7 +142,7 @@ function App() {
 							}
 						/>
 						<Route
-							path="/company/jobs/:id/candidates/:id"
+							path="/company/jobs/:jobId/candidates/:userId"
 							element={
 								companyAuthenticated ? (
 									<SingleCandidate />
