@@ -235,7 +235,6 @@ const RegisterUser = () => {
 			});
 
 			const data: IResponse = await response.json();
-			console.log(data);
 
 			if (data.message === "Usuário criado com sucesso") {
 				setShowSpinner(false);
