@@ -18,6 +18,7 @@ import { useContext } from "react";
 import { ApiContext } from "../../context/api";
 import { useNavigate } from "react-router-dom";
 import { UserAuthContext } from "../../context/UserAuth";
+import { GrValidate } from "react-icons/gr";
 
 const UserAuthenticatedNavBar = () => {
 	const [isLargerThan768px] = useMediaQuery("(min-width: 768px)");
@@ -95,11 +96,22 @@ const UserAuthenticatedNavBar = () => {
 								>
 									<MenuItem
 										padding="1rem"
-										icon={<AiFillExperiment fontSize="2rem" />}
+										icon={<GrValidate fontSize="2rem" />}
 									>
-										Atualizar Experiência
+										Gerenciar Experiências
 									</MenuItem>
 								</Link>
+								<Link
+									href="/users/experience/create"
+									_hover={{
+										textDecoration: "none",
+									}}
+								>
+									<MenuItem icon={<AiFillExperiment fontSize="2rem" />}>
+										Cadastrar Experiência
+									</MenuItem>
+								</Link>
+
 								<MenuItem
 									padding="1rem"
 									icon={<RiLogoutBoxRFill fontSize="2rem" />}
@@ -125,15 +137,37 @@ const UserAuthenticatedNavBar = () => {
 								<HiMenu />
 							</MenuButton>
 							<MenuList fontSize="1.5rem" position="static">
-								<Link href="/jobs">
+								<Link
+									href="/jobs"
+									_hover={{
+										textDecoration: "none",
+									}}
+								>
 									<MenuItem icon={<BiAward fontSize="2rem" />}>
 										Ver Vagas
 									</MenuItem>
 								</Link>
 								<Box borderTop="0.1rem solid #cccc">
-									<Link href="/users/experience">
+									<Link
+										href="/users/experience"
+										_hover={{
+											textDecoration: "none",
+										}}
+									>
+										<MenuItem icon={<GrValidate fontSize="2rem" />}>
+											Gerenciar Experiências
+										</MenuItem>
+									</Link>
+								</Box>
+								<Box borderTop="0.1rem solid #cccc">
+									<Link
+										href="/users/experience/create"
+										_hover={{
+											textDecoration: "none",
+										}}
+									>
 										<MenuItem icon={<AiFillExperiment fontSize="2rem" />}>
-											Atualizar Experiência
+											Cadastrar Experiência
 										</MenuItem>
 									</Link>
 								</Box>

@@ -58,7 +58,6 @@ export class ApplicationsService {
         message: 'Candidatura efetuada com sucesso',
       };
     } catch (e) {
-      console.log(e);
       throw e;
     }
   }
@@ -89,7 +88,6 @@ export class ApplicationsService {
           'Não existe nenhum candidato para a vaga até o momento',
         );
       }
-
       return candidates;
     } catch (e) {
       throw e;

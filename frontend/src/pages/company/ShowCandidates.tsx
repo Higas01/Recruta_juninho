@@ -1,6 +1,6 @@
-import { Flex, Heading, useMediaQuery } from "@chakra-ui/react";
+import { Flex, Heading, useMediaQuery, Text } from "@chakra-ui/react";
 import CandidatesCard from "../../components/CandidatesCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { IUsers } from "../../interface/IUsers";
 import { ApiContext } from "../../context/api";
@@ -8,22 +8,34 @@ import { ApiContext } from "../../context/api";
 const ShowCandidates = () => {
 	const [isLargerThan950px] = useMediaQuery("(min-width: 950px)");
 
+	const [notExistsCandidates, setNotExistsCandidates] =
+		useState<boolean>(false);
+
 	const { id } = useParams();
 
 	const { URL } = useContext(ApiContext);
 
 	const [data, setData] = useState<IUsers[]>([]);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		const getCandidates = async () => {
 			const response = await fetch(`${URL}/application?jobId=${id}`);
 			const result = await response.json();
-			console.log(result);
 			setData(result);
+			console.log(result);
+			if (result.statusCode === 404) {
+				setNotExistsCandidates(true);
+			}
 		};
 
 		getCandidates();
 	}, []);
+
+	const handleShowExperience = (userId: number) => {
+		navigate(`/company/jobs/${id}/candidates/${userId}`);
+	};
 
 	return (
 		<section>
@@ -41,7 +53,9 @@ const ShowCandidates = () => {
 					width="90%"
 				>
 					<Heading as="h1" fontSize={isLargerThan950px ? "3rem" : "2rem"}>
-						Todos os candidatos da vaga estão listados abaixo
+						{notExistsCandidates
+							? "Nenhum candidato aplicou para sua vaga até o momento"
+							: "Todos os candidatos da vaga estão listados abaixo"}
 					</Heading>
 					{data.length > 0 &&
 						data.map((value) => (
@@ -54,6 +68,9 @@ const ShowCandidates = () => {
 								tel={value.user.tel}
 								description={value.user.description}
 								email={value.user.email}
+								functionShowExperiences={() =>
+									handleShowExperience(value.user.id)
+								}
 							/>
 						))}
 				</Flex>

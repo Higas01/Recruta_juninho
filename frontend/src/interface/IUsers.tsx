@@ -12,4 +12,5 @@ interface User {
 	level: string;
 	age: number;
 	tel: string;
+	id: number;
 }

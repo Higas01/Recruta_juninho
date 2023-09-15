@@ -18,6 +18,7 @@ interface Props {
 	age: number;
 	description: string;
 	email: string;
+	functionShowExperiences?: Function;
 }
 
 const CandidatesCard = (Props: Props) => {
@@ -81,7 +82,7 @@ const CandidatesCard = (Props: Props) => {
 									<Text fontSize="1.3rem" key={index}>
 										{hability}
 									</Text>
-								))}	
+								))}
 						</Flex>
 					</Flex>
 					<Box margin="1rem">
@@ -112,7 +113,13 @@ const CandidatesCard = (Props: Props) => {
 								? "Ocultar Descrição do candidato"
 								: "Exibir Descrição do candidato"}
 						</Btn>
-						<Btn type="button" border={true} margin={true} noWidth={true}>
+						<Btn
+							type="button"
+							border={true}
+							margin={true}
+							noWidth={true}
+							setOnClick={Props.functionShowExperiences}
+						>
 							Exibir Experiências
 						</Btn>
 					</Flex>

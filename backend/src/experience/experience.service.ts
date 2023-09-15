@@ -9,7 +9,7 @@ import { Experience } from './experience.entity';
 import { CreateExperienceDTO } from 'src/dto/create.experience.dto';
 import { User } from '../user/user.entity';
 import { UpdateExperienceDTO } from 'src/dto/update.experience.dto';
-import { Request } from 'express';
+import { Request, query } from 'express';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -50,6 +50,7 @@ export class ExperienceService {
         description: value.description,
         project_name: value.project_name,
         habilitys: value.habilitys,
+        experience_profile: value.experience_profile,
       };
       const experience =
         await this.experienceRepository.create(experienceForCreate);
@@ -59,24 +60,44 @@ export class ExperienceService {
         experience,
       };
     } catch (error) {
+      console.log(value);
       throw error;
     }
   }
 
-  async getByFK(@Req() request: Request, queryId: number): Promise<object> {
+  async getByID(queryId: number): Promise<object> {
+    try {
+      const id = queryId;
+      const existingUser = await this.userRepository.findByPk(id);
+
+      if (!existingUser) {
+        throw new BadRequestException('Usuário não existe');
+      }
+
+      return this.experienceRepository.findAll({
+        where: {
+          userId: id,
+        },
+        include: {
+          model: User,
+          attributes: ['name'],
+        },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getByToken(@Req() request: Request): Promise<object> {
     try {
       const token = request.cookies['token'];
-      let id: number;
-      if (token) {
-        const decodedToken = await this.jwtService.verify(token, {
-          secret: process.env.JWT_USER,
-        });
 
-        const idToken = decodedToken.sub;
-        id = idToken;
-      } else {
-        id = queryId;
-      }
+      const decodedToken = await this.jwtService.verify(token, {
+        secret: process.env.JWT_USER,
+      });
+
+      const id = decodedToken.sub;
+
       const existingUser = await this.userRepository.findByPk(id);
 
       if (!existingUser) {
@@ -106,6 +127,7 @@ export class ExperienceService {
         project_name: value.project_name,
         description: value.description,
         habilitys: value.habilitys,
+        experience_profile: value.experience_profile,
       };
 
       await this.experienceRepository.update(experienceForUpdate, {

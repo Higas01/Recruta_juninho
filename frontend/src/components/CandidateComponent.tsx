@@ -1,6 +1,7 @@
 import { Flex, Heading, Text, Box, useMediaQuery } from "@chakra-ui/react";
 import { AiFillExperiment } from "react-icons/ai";
 import { MdBusinessCenter } from "react-icons/md";
+import Btn from "./Btn";
 
 interface Props {
 	title: string;
@@ -8,6 +9,8 @@ interface Props {
 	description: string;
 	perfil: string;
 	name_project: string;
+	deleteBtn?: boolean;
+	deleteBtnFunction?: Function;
 }
 
 const CandidateComponent = (Props: Props) => {
@@ -21,6 +24,7 @@ const CandidateComponent = (Props: Props) => {
 			direction="column"
 			padding="3rem"
 			backgroundColor="#ffff"
+			width={isLargerThan835px ? "100%" : undefined}
 		>
 			<Heading as="h2" fontSize="2rem">
 				<span
@@ -104,6 +108,19 @@ const CandidateComponent = (Props: Props) => {
 							: Props.description}
 					</Text>
 				</Flex>
+				{Props.deleteBtn && (
+					<Box margin="2rem">
+						<Btn
+							border={true}
+							type="button"
+							justifyContent="start"
+							alingItems="start"
+							setOnClick={Props.deleteBtnFunction}
+						>
+							Deletar Experiência
+						</Btn>
+					</Box>
+				)}
 			</Flex>
 		</Flex>
 	);
