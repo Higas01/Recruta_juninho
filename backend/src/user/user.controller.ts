@@ -19,7 +19,7 @@ export class UserController {
 
   @HttpCode(201)
   @Post()
-  createUse(@Body() value: CreateUserDTO): Promise<object> {
+  createUser(@Body() value: CreateUserDTO): Promise<object> {
     return this.userService.createUser(value);
   }
 
