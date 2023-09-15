@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { Applications } from './applications.entity';
 import { User } from 'src/user/user.entity';
-import { Job } from 'src/job/job.entity';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 

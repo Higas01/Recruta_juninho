@@ -60,7 +60,6 @@ export class ExperienceService {
         experience,
       };
     } catch (error) {
-      console.log(value);
       throw error;
     }
   }

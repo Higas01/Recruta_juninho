@@ -9,8 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     CloudinaryModule,
     JwtModule.register({
-      secret:
-        'dsakdlsçajsalkjaskljglksajglksajblkzxjbklxzjbklxzjblkxzjlksjdlkasjldksajlkdaskl21h421ui21hklasfhaskfa',
+      secret: process.env.JWT_COMPANY,
       signOptions: {
         expiresIn: '7d',
       },

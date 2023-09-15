@@ -6,9 +6,7 @@ import {
 	FormHelperText,
 	Flex,
 } from "@chakra-ui/react";
-import { State } from "../../interface/IState";
 import { Dispatch, SetStateAction } from "react";
-import { City } from "../../interface/ICity";
 
 interface Props {
 	setValue: Dispatch<SetStateAction<string>>;

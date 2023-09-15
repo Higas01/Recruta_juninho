@@ -9,7 +9,6 @@ import {
 import { User } from './user.entity';
 import { CreateUserDTO } from 'src/dto/create.user.dto';
 import * as bcrypt from 'bcrypt';
-import { UpdateUserDTO } from 'src/dto/update.user.dto';
 import { JwtService } from '@nestjs/jwt';
 import { LoginUserDTO } from 'src/dto/login.user.dto';
 import { Response, Request } from 'express';
