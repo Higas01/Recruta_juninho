@@ -19,7 +19,13 @@ const JobCardHome = (Props: Props) => {
 	const [isLargerThan900px] = useMediaQuery("(min-width: 900px)");
 	const [isLargerThan1280px] = useMediaQuery("(min-width: 1280px)");
 	return (
-		<Flex margin="1.5rem" flexDirection="column" boxShadow="lg" flexWrap="wrap">
+		<Flex
+			margin="1.5rem"
+			flexDirection="column"
+			boxShadow="lg"
+			flexWrap="wrap"
+			padding="1rem"
+		>
 			<Heading as="h3" textAlign="center">
 				{Props.name}
 			</Heading>

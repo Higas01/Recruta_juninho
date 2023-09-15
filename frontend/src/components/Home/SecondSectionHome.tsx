@@ -17,7 +17,6 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
-				padding="1rem"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
 				<TbDeviceDesktopHeart fontSize="4rem" />
@@ -31,7 +30,6 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
-				padding="1rem"
 				bg="#fff"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
@@ -46,7 +44,6 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
-				padding="1rem"
 				bg="#fff"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
