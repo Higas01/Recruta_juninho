@@ -115,6 +115,7 @@ export class UserService {
         expires: expires,
         httpOnly: true,
         sameSite: 'none',
+        secure: true,
       });
 
       response.status(200).json({
