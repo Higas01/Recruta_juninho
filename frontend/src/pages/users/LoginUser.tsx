@@ -90,7 +90,6 @@ const LoginUser = () => {
 			setShowSpinner(false);
 			setUserAuthenticated(true);
 		} catch (e) {
-			console.log(e);
 			setShowSpinner(false);
 			setUnknownError(true);
 		}
