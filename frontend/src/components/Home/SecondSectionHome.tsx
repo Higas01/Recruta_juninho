@@ -17,6 +17,7 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
+				padding="1rem"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
 				<TbDeviceDesktopHeart fontSize="4rem" />
@@ -30,6 +31,7 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
+				padding="1rem"
 				bg="#fff"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
@@ -44,6 +46,7 @@ const SecondSectionHome = () => {
 				boxShadow="lg"
 				p="6"
 				rounded="md"
+				padding="1rem"
 				bg="#fff"
 				maxWidth={isLargerThan768px ? "25%" : "75%"}
 			>
@@ -51,7 +54,7 @@ const SecondSectionHome = () => {
 				<Heading as="h3">Perfeito para sua primeira vaga!</Heading>
 				<Text fontSize="1.5rem" margin="1rem">
 					Buscamos inserir novos talentos no mercado de tecnologia, logo, somos
-					perfeitos para desenvolvedores iniciantes!
+					perfeitos para desenvolvedores!
 				</Text>
 			</Box>
 		</Flex>
