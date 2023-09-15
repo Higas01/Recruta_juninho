@@ -194,7 +194,7 @@ export class CompanyService {
       if (!company) {
         throw new BadRequestException('E-mail não cadastrado');
       }
-
+      ('');
       const isMatch = await bcrypt.compare(value.password, company.password);
       if (!isMatch) {
         throw new BadRequestException('Senha incorreta');

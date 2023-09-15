@@ -88,7 +88,7 @@ export class UserService {
 
   async loginUser(
     value: LoginUserDTO,
-    @Res({ passthrough: true }) response: Response,
+    @Res() response: Response,
   ): Promise<void> {
     try {
       const user = await this.userRepository.findOne({
