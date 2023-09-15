@@ -24,7 +24,6 @@ const ShowCandidates = () => {
 			const response = await fetch(`${URL}/application?jobId=${id}`);
 			const result = await response.json();
 			setData(result);
-			console.log(result);
 			if (result.statusCode === 404) {
 				setNotExistsCandidates(true);
 			}
