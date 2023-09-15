@@ -60,7 +60,6 @@ const Job = () => {
 		const getJobs = async () => {
 			const response = await fetch(`${URL}/job`);
 			const result = await response.json();
-			console.log(result);
 			setData(result);
 		};
 
