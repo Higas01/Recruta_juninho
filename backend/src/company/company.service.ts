@@ -235,7 +235,11 @@ export class CompanyService {
 
   async logoutCompany(@Res() response: Response) {
     try {
-      response.clearCookie('token');
+      response.clearCookie('token', {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      });
 
       response.status(200).json({
         message: 'Usuário deslogado com sucesso',

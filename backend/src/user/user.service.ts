@@ -141,8 +141,11 @@ export class UserService {
 
   async logoutUser(@Res() response: Response): Promise<void> {
     try {
-      response.clearCookie('token');
-
+      response.clearCookie('token', {
+        httpOnly: true,
+        sameSite: 'none',
+        secure: true,
+      });
       response.status(200).json({
         message: 'Usuário deslogado com sucesso',
       });
