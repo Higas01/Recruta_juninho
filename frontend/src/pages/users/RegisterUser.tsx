@@ -217,7 +217,7 @@ const RegisterUser = () => {
 				age,
 				email: email,
 				level,
-				arrayHabilitys,
+				habilitys: arrayHabilitys,
 				description,
 				tel,
 				city,
