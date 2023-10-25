@@ -40,7 +40,7 @@ function App() {
 		userAuthenticated,
 		userIsLoading,
 	]);
-	console.log(userAuthenticated);
+	console.log(userAuthenticated, companyAuthenticated);
 
 	return (
 		<>
