@@ -89,7 +89,7 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
 								<Link
-									href="experience"
+									href="users/experience"
 									_hover={{
 										textDecoration: "none",
 									}}
