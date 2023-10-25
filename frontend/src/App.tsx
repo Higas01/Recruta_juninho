@@ -41,6 +41,7 @@ function App() {
 		userIsLoading,
 	]);
 
+	console.log(userAuthenticated, companyAuthenticated);
 	return (
 		<>
 			{companyIsLoading ? (
