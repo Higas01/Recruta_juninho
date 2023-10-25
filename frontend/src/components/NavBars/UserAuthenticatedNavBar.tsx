@@ -72,7 +72,7 @@ const UserAuthenticatedNavBar = () => {
 							fontSize="1.5rem"
 							fontWeight="bold"
 							marginRight="2rem"
-							href="/jobs"
+							href="jobs"
 						>
 							VER VAGAS
 						</Link>
@@ -89,7 +89,7 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
 								<Link
-									href="/users/experience"
+									href="experience"
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -102,7 +102,7 @@ const UserAuthenticatedNavBar = () => {
 									</MenuItem>
 								</Link>
 								<Link
-									href="/users/experience/create"
+									href="users/experience/create"
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -138,7 +138,7 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem" position="static">
 								<Link
-									href="/jobs"
+									href="jobs"
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -149,7 +149,7 @@ const UserAuthenticatedNavBar = () => {
 								</Link>
 								<Box borderTop="0.1rem solid #cccc">
 									<Link
-										href="/users/experience"
+										href="users/experience"
 										_hover={{
 											textDecoration: "none",
 										}}
@@ -161,7 +161,7 @@ const UserAuthenticatedNavBar = () => {
 								</Box>
 								<Box borderTop="0.1rem solid #cccc">
 									<Link
-										href="/users/experience/create"
+										href="users/experience/create"
 										_hover={{
 											textDecoration: "none",
 										}}
