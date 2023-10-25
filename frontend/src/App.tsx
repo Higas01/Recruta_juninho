@@ -32,8 +32,8 @@ function App() {
 		useContext(CompanyAuthContext);
 
 	useEffect(() => {
-		verifyUserToken();
 		verifyCompanyToken();
+		verifyUserToken();
 	}, [
 		companyAuthenticated,
 		companyIsLoading,
