@@ -32,7 +32,6 @@ const UserAuthProvider = ({ children }: { children: ReactNode }) => {
 			credentials: "include",
 		});
 		const data: IResponse = await response.json();
-		console.log(data);
 
 		if (data.message === "Token válido") {
 			setUserIsLoading(false);
