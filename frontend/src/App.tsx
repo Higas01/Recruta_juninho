@@ -40,6 +40,7 @@ function App() {
 		userAuthenticated,
 		userIsLoading,
 	]);
+	console.log(userAuthenticated);
 
 	return (
 		<>
