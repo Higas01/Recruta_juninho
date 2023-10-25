@@ -20,7 +20,7 @@ const UserAuthContext = createContext({} as AuthContextProps);
 
 const UserAuthProvider = ({ children }: { children: ReactNode }) => {
 	const [userAuthenticated, setUserAuthenticated] = useState<boolean | null>(
-		false
+		null
 	);
 	const [userIsLoading, setUserIsLoading] = useState<boolean>(true);
 
