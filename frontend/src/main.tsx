@@ -11,15 +11,15 @@ import { ApiProvider } from "./context/api.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
 		<ChakraProvider>
-			<UserAuthProvider>
-				<CompanyAuthProvider>
-					<ApiProvider>
-						<BrowserRouter>
+			<ApiProvider>
+				<BrowserRouter>
+					<UserAuthProvider>
+						<CompanyAuthProvider>
 							<App />
-						</BrowserRouter>
-					</ApiProvider>
-				</CompanyAuthProvider>
-			</UserAuthProvider>
+						</CompanyAuthProvider>
+					</UserAuthProvider>
+				</BrowserRouter>
+			</ApiProvider>
 		</ChakraProvider>
 	</React.StrictMode>
 );
