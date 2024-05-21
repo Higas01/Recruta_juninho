@@ -8,11 +8,13 @@ import { JwtModule } from '@nestjs/jwt';
 @Module({
   imports: [
     CloudinaryModule,
-    JwtModule.register({
-      secret: process.env.JWT_COMPANY,
-      signOptions: {
-        expiresIn: '7d',
-      },
+    JwtModule.registerAsync({
+      useFactory: () => ({
+        secret: process.env.JWT_COMPANY,
+        signOptions: {
+          expiresIn: '7d',
+        },
+      })
     }),
   ],
   providers: [...companyProviders, CompanyService],
