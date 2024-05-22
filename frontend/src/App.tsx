@@ -43,7 +43,7 @@ function App() {
 
 	return (
 		<>
-			{companyIsLoading ? (
+			{companyIsLoading || userIsLoading ? (
 				<Flex minHeight="85vh" alignItems="center" justifyContent="center">
 					<Spinner boxSize="5rem" />
 				</Flex>
