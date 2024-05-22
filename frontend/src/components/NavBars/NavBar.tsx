@@ -8,10 +8,11 @@ import {
 	MenuItem,
 	useMediaQuery,
 	Box,
-	Link,
+	Text,
 } from "@chakra-ui/react";
 import { BiSolidUser, BiSolidBusiness, BiAward } from "react-icons/bi";
 import { HiMenu } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
 	const [isLargerThan768px] = useMediaQuery("(min-width: 768px)");
@@ -33,25 +34,26 @@ const NavBar = () => {
 					textTransform="uppercase"
 					fontSize={isLargerThan768px ? "2rem" : "1.5rem"}
 				>
-					<Link
-						href="/"
+					<Link to="/">
+					<Text
 						_hover={{
 							textDecoration: "none",
 						}}
 					>
 						Recruta Juninho
+					</Text>
 					</Link>
 				</Heading>
-
 				{isLargerThan768px && (
 					<Flex textAlign="center" alignItems="center">
-						<Link
+						<Link to="/jobs">
+						<Text
 							fontSize="1.5rem"
 							fontWeight="bold"
 							marginRight="2rem"
-							href="/jobs"
 						>
 							VER VAGAS
+						</Text>
 						</Link>
 						<Menu>
 							<MenuButton
@@ -65,8 +67,8 @@ const NavBar = () => {
 								Login
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
-								<Link
-									href="/users/login"
+								<Link to="/users/login">
+								<Text
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -77,9 +79,10 @@ const NavBar = () => {
 									>
 										Sou Candidato
 									</MenuItem>
+								</Text>
 								</Link>
-								<Link
-									href="/company/login"
+								<Link to="/company/login">
+								<Text
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -88,8 +91,9 @@ const NavBar = () => {
 										padding="1rem"
 										icon={<BiSolidBusiness fontSize="2rem" />}
 									>
-										<Link>Sou Empresa</Link>
+										<Text>Sou Empresa</Text>
 									</MenuItem>
+								</Text>
 								</Link>
 							</MenuList>
 						</Menu>
@@ -105,8 +109,8 @@ const NavBar = () => {
 								Registre-se
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
-								<Link
-									href="/users/register"
+								<Link to="/users/register">
+								<Text
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -117,9 +121,10 @@ const NavBar = () => {
 									>
 										Sou Candidato
 									</MenuItem>
+								</Text>
 								</Link>
-								<Link
-									href="/company/register"
+								<Link to="/company/register">
+								<Text
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -130,6 +135,7 @@ const NavBar = () => {
 									>
 										Sou Empresa
 									</MenuItem>
+								</Text>
 								</Link>
 							</MenuList>
 						</Menu>
@@ -149,33 +155,43 @@ const NavBar = () => {
 								<HiMenu />
 							</MenuButton>
 							<MenuList fontSize="1.5rem" position="static">
-								<Link href="/jobs">
+								<Link to="/jobs">
+								<Text>
 									<MenuItem icon={<BiAward fontSize="2rem" />}>
 										Ver Vagas
 									</MenuItem>
+								</Text>
 								</Link>
 								<Box borderTop="0.1rem solid #cccc">
-									<Link href="/users/login">
+									<Link to="/users/login">
+									<Text>
 										<MenuItem icon={<BiSolidUser fontSize="2rem" />}>
 											Login como Candidato
 										</MenuItem>
+									</Text>
 									</Link>
-									<Link href="/company/login">
+									<Link to="/company/login">
+									<Text>
 										<MenuItem icon={<BiSolidBusiness fontSize="2rem" />}>
 											Login Como Empresa
 										</MenuItem>
+									</Text>
 									</Link>
 								</Box>
 								<Box borderTop="0.1rem solid #cccc">
-									<Link href="/users/register">
+									<Link to="/users/register">
+									<Text>
 										<MenuItem icon={<BiSolidUser fontSize="2rem" />}>
 											Cadastre-se como Candidato
 										</MenuItem>
+									</Text>
 									</Link>
-									<Link href="/company/register">
+									<Link to="/company/register">
+									<Text>
 										<MenuItem icon={<BiSolidBusiness fontSize="2rem" />}>
 											Cadastre-se como Empresa
 										</MenuItem>
+									</Text>
 									</Link>
 								</Box>
 							</MenuList>

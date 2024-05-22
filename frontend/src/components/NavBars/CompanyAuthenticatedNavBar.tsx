@@ -8,7 +8,7 @@ import {
 	MenuItem,
 	useMediaQuery,
 	Box,
-	Link,
+	Text,
 } from "@chakra-ui/react";
 import { HiMenu } from "react-icons/hi";
 import { RiLogoutBoxRFill } from "react-icons/ri";
@@ -18,6 +18,7 @@ import { useContext } from "react";
 import { ApiContext } from "../../context/api";
 import { useNavigate } from "react-router-dom";
 import { CompanyAuthContext } from "../../context/companyAuth";
+import { Link } from "react-router-dom";
 
 const CompanyAuthenticatedNavBar = () => {
 	const [isLargerThan768px] = useMediaQuery("(min-width: 768px)");
@@ -53,25 +54,26 @@ const CompanyAuthenticatedNavBar = () => {
 					textTransform="uppercase"
 					fontSize={isLargerThan768px ? "2rem" : "1.5rem"}
 				>
-					<Link
-						href="/"
+					<Link to="/">
+					<Text
 						_hover={{
 							textDecoration: "none",
 						}}
 					>
 						Recruta Juninho
+					</Text>
 					</Link>
 				</Heading>
-
 				{isLargerThan768px && (
 					<Flex textAlign="center" alignItems="center">
-						<Link
+						<Link to="/company/jobs">
+						<Text
 							fontSize="1.5rem"
 							fontWeight="bold"
 							marginRight="2rem"
-							href="/company/jobs"
 						>
 							VER MINHAS VAGAS
+						</Text>
 						</Link>
 						<Menu>
 							<MenuButton
@@ -85,8 +87,8 @@ const CompanyAuthenticatedNavBar = () => {
 								Menu
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
-								<Link
-									href="/company/create"
+								<Link to="/company/create">
+								<Text
 									_hover={{
 										textDecoration: "none",
 									}}
@@ -97,6 +99,7 @@ const CompanyAuthenticatedNavBar = () => {
 									>
 										Cadastrar Vaga
 									</MenuItem>
+								</Text>
 								</Link>
 								<MenuItem
 									padding="1rem"
@@ -124,15 +127,19 @@ const CompanyAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem" position="static">
 								<Box borderTop="0.1rem solid #cccc">
-									<Link href="/company/create">
+									<Link to="/company/create">
+									<Text>
 										<MenuItem icon={<TiBusinessCard fontSize="2rem" />}>
 											Cadastra Vaga
 										</MenuItem>
+									</Text>
 									</Link>
-									<Link href="/company/jobs">
+									<Link to="/company/jobs">
+									<Text>
 										<MenuItem icon={<MdBusinessCenter fontSize="2rem" />}>
 											Ver Minhas Vagas
 										</MenuItem>
+									</Text>
 									</Link>
 								</Box>
 								<Box borderTop="0.1rem solid #cccc">

@@ -8,8 +8,9 @@ import {
 	MenuItem,
 	useMediaQuery,
 	Box,
-	Link,
+	Text
 } from "@chakra-ui/react";
+import { Link } from 'react-router-dom';
 import { BiAward } from "react-icons/bi";
 import { HiMenu } from "react-icons/hi";
 import { RiLogoutBoxRFill } from "react-icons/ri";
@@ -56,25 +57,24 @@ const UserAuthenticatedNavBar = () => {
 					textTransform="uppercase"
 					fontSize={isLargerThan768px ? "2rem" : "1.5rem"}
 				>
-					<Link
-						href="/"
-						_hover={{
-							textDecoration: "none",
-						}}
-					>
+					<Link to="/">
 						Recruta Juninho
 					</Link>
 				</Heading>
 
 				{isLargerThan768px && (
 					<Flex textAlign="center" alignItems="center">
-						<Link
-							fontSize="1.5rem"
-							fontWeight="bold"
-							marginRight="2rem"
-							href="jobs"
-						>
-							VER VAGAS
+						<Link to="jobs">
+							<Text
+								fontSize="1.5rem"
+								fontWeight="bold"
+								marginRight="2rem"
+								_hover={{
+									textDecoration: "underline",
+								}}
+							>
+								VER VAGAS
+							</Text>
 						</Link>
 						<Menu>
 							<MenuButton
@@ -89,10 +89,7 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem">
 								<Link
-									href="/users/experience"
-									_hover={{
-										textDecoration: "none",
-									}}
+									to="/users/experience"
 								>
 									<MenuItem
 										padding="1rem"
@@ -102,10 +99,7 @@ const UserAuthenticatedNavBar = () => {
 									</MenuItem>
 								</Link>
 								<Link
-									href="/users/experience/create"
-									_hover={{
-										textDecoration: "none",
-									}}
+									to="/users/experience/create"
 								>
 									<MenuItem icon={<AiFillExperiment fontSize="2rem" />}>
 										Cadastrar Experiência
@@ -138,10 +132,7 @@ const UserAuthenticatedNavBar = () => {
 							</MenuButton>
 							<MenuList fontSize="1.5rem" position="static">
 								<Link
-									href="jobs"
-									_hover={{
-										textDecoration: "none",
-									}}
+									to="jobs"
 								>
 									<MenuItem icon={<BiAward fontSize="2rem" />}>
 										Ver Vagas
@@ -149,10 +140,7 @@ const UserAuthenticatedNavBar = () => {
 								</Link>
 								<Box borderTop="0.1rem solid #cccc">
 									<Link
-										href="/users/experience"
-										_hover={{
-											textDecoration: "none",
-										}}
+										to="/users/experience"
 									>
 										<MenuItem icon={<GrValidate fontSize="2rem" />}>
 											Gerenciar Experiências
@@ -161,10 +149,7 @@ const UserAuthenticatedNavBar = () => {
 								</Box>
 								<Box borderTop="0.1rem solid #cccc">
 									<Link
-										href="/users/experience/create"
-										_hover={{
-											textDecoration: "none",
-										}}
+										to="/users/experience/create"
 									>
 										<MenuItem icon={<AiFillExperiment fontSize="2rem" />}>
 											Cadastrar Experiência
